@@ -77,7 +77,7 @@ def nmap(ip):
 
 @app.route('/vulscan/<ip>')
 
-def vulscan(ip):
+def nmap(ip):
     nip = str(ip)
     snip = nip + ".xml"
     cmd = ["nmap",nip,"-sV","-Pn","-o","snip","script=vuln"]
