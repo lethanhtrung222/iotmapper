@@ -41,27 +41,27 @@ def vtri(pos):
 
     return Response(out, mimetype='application/json')
 
-@app.route('/camera/<pos>')
-def camerash(pos):
-    ll = pos.split(',')
-    cmd = ["sh","camera.sh",ll[0],ll[1]]
-    p = subprocess.Popen(cmd, stdout = subprocess.PIPE,
-                            stderr=subprocess.PIPE,
-                            stdin=subprocess.PIPE)
-    out,err = p.communicate()
+#@app.route('/camera/<pos>')
+#def camerash(pos):
+#    ll = pos.split(',')
+#    cmd = ["sh","camera.sh",ll[0],ll[1]]
+#    p = subprocess.Popen(cmd, stdout = subprocess.PIPE,
+#                            stderr=subprocess.PIPE,
+#                            stdin=subprocess.PIPE)
+#    out,err = p.communicate()
 
-    return Response(out, mimetype='application/json')
+#    return Response(out, mimetype='application/json')
 
-@app.route('/printer/<pos>')
-def printersh(pos):
-    ll = pos.split(',')
-    cmd = ["sh","printer.sh",ll[0],ll[1]]
-    p = subprocess.Popen(cmd, stdout = subprocess.PIPE,
-                            stderr=subprocess.PIPE,
-                            stdin=subprocess.PIPE)
-    out,err = p.communicate()
+#@app.route('/printer/<pos>')
+#def printersh(pos):
+#    ll = pos.split(',')
+#    cmd = ["sh","printer.sh",ll[0],ll[1]]
+#    p = subprocess.Popen(cmd, stdout = subprocess.PIPE,
+#                            stderr=subprocess.PIPE,
+#                            stdin=subprocess.PIPE)
+#    out,err = p.communicate()
 
-    return Response(out, mimetype='application/json')
+#    return Response(out, mimetype='application/json')
 
 @app.route('/nmap/<ip>')
 
@@ -75,17 +75,17 @@ def nmap(ip):
     out,err = p.communicate()
     return out + " and " +nip
 
-@app.route('/vulscan/<ip>')
+#@app.route('/vulscan/<ip>')
 
-def nmap(ip):
-    nip = str(ip)
-    snip = nip + ".xml"
-    cmd = ["nmap",nip,"-sV","-Pn","-o","snip","script=vuln"]
-    p = subprocess.Popen(cmd, stdout = subprocess.PIPE,
-                            stderr=subprocess.PIPE,
-                            stdin=subprocess.PIPE)
-    out,err = p.communicate()
-    return out + " and " +nip
+#def nmap(ip):
+#    nip = str(ip)
+#    snip = nip + ".xml"
+#    cmd = ["nmap",nip,"-sV","-Pn","-o","snip","script=vuln"]
+#    p = subprocess.Popen(cmd, stdout = subprocess.PIPE,
+#                            stderr=subprocess.PIPE,
+#                            stdin=subprocess.PIPE)
+#    out,err = p.communicate()
+#    return out + " and " +nip
 
 @app.route('/')
 def index():
