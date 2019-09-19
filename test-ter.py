@@ -39,6 +39,18 @@ def vtri(pos):
 
     return Response(out, mimetype='application/json')
 
+#Brute Admin
+@app.route('/bruteadmin/<mlink>')
+def bruteadmin(mlink):
+    #ll = mlink.split(',')
+    cmd = ["sh","bruteadmin.sh",mlink]
+    p = subprocess.Popen(cmd, stdout = subprocess.PIPE,
+                            stderr=subprocess.PIPE,
+                            stdin=subprocess.PIPE)
+    out,err = p.communicate()
+
+    return Response(out, mimetype='application/json')
+
 @app.route('/nmap/<ip>')
 
 def nmap(ip):
