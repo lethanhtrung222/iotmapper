@@ -27,6 +27,14 @@ def map():
 def hello_name(name):
     la = name.split(',')
     return 'Hello '+ la[0] + '!' + la[1]
+@app.route('/info/')
+def info():
+    cmd = ["lshw"]
+    p = subprocess.Popen(cmd, stdout = subprocess.PIPE,
+                            stderr=subprocess.PIPE,
+                            stdin=subprocess.PIPE)
+    out,err = p.communicate()
+    return out
 
 @app.route('/vtri/<pos>')
 def vtri(pos):
