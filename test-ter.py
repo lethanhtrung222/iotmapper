@@ -51,6 +51,19 @@ def bruteadmin(mlink):
 
     return Response(out, mimetype='application/json')
 
+@app.route('/host/<ip>')
+
+def host(ip):
+    nip = str(ip)
+    cmd = ["shodan","host",nip]
+    p = subprocess.Popen(cmd, stdout = subprocess.PIPE,
+                            stderr=subprocess.PIPE,
+                            stdin=subprocess.PIPE)
+    out,err = p.communicate()
+    return out + " and " +nip
+
+
+
 @app.route('/nmap/<ip>')
 
 def nmap(ip):
