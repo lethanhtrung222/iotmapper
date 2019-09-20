@@ -13,7 +13,7 @@ sys.setdefaultencoding('utf8')
 
 app = Flask(__name__)
 
-@app.route("/map/")
+@app.route("/a/map/")
 
 def map():
     cmd = ["sh","zim.sh"]
@@ -23,11 +23,11 @@ def map():
     out,err = p.communicate()
     return out
 
-@app.route('/hello/<name>')
+@app.route('/a/hello/<name>')
 def hello_name(name):
     la = name.split(',')
     return 'Hello '+ la[0] + '!' + la[1]
-@app.route('/info/')
+@app.route('/a/info/')
 def info():
     cmd = ["lshw"]
     p = subprocess.Popen(cmd, stdout = subprocess.PIPE,
@@ -36,7 +36,7 @@ def info():
     out,err = p.communicate()
     return out
 
-@app.route('/vtri/<pos>')
+@app.route('/a/vtri/<pos>')
 def vtri(pos):
     ll = pos.split(',')
     cmd = ["sh","shodan.sh",ll[0],ll[1]]
@@ -47,8 +47,34 @@ def vtri(pos):
 
     return Response(out, mimetype='application/json')
 
+
+@app.route('/a/camera/<pos>')
+def camera(pos):
+    ll = pos.split(',')
+    cmd = ["sh","camera.sh",ll[0],ll[1]]
+    p = subprocess.Popen(cmd, stdout = subprocess.PIPE,
+                            stderr=subprocess.PIPE,
+                            stdin=subprocess.PIPE)
+    out,err = p.communicate()
+
+    return Response(out, mimetype='application/json')
+
+
+@app.route('/a/printer/<pos>')
+def printer(pos):
+    ll = pos.split(',')
+    cmd = ["sh","printer.sh",ll[0],ll[1]]
+    p = subprocess.Popen(cmd, stdout = subprocess.PIPE,
+                            stderr=subprocess.PIPE,
+                            stdin=subprocess.PIPE)
+    out,err = p.communicate()
+
+    return Response(out, mimetype='application/json')
+
+
+
 #Brute Admin
-@app.route('/bruteadmin/<mlink>')
+@app.route('/a/bruteadmin/<mlink>')
 def bruteadmin(mlink):
     #ll = mlink.split(',')
     cmd = ["sh","bruteadmin.sh",mlink]
@@ -59,7 +85,7 @@ def bruteadmin(mlink):
 
     return Response(out, mimetype='application/json')
 
-@app.route('/host/<ip>')
+@app.route('/a/host/<ip>')
 
 def host(ip):
     nip = str(ip)
@@ -72,7 +98,7 @@ def host(ip):
 
 
 
-@app.route('/nmap/<ip>')
+@app.route('/a/nmap/<ip>')
 
 def nmap(ip):
     nip = str(ip)
@@ -83,8 +109,24 @@ def nmap(ip):
     out,err = p.communicate()
     return out + " and " +nip
 
-@app.route('/')
+
+@app.route('/a/uread/') 
+def ureadall(id):
+    #ll = mlink.split(',') urlid = 
+    #"http://45.63.121.172/api/Uread.php?id=" + str(id)
+    cmd = ["curl","http://45.63.121.172/api/Uread.php"]
+    p = subprocess.Popen(cmd, stdout = subprocess.PIPE,
+                            stderr=subprocess.PIPE,
+                            stdin=subprocess.PIPE)
+    out,err = p.communicate()
+    return Response(out, mimetype='application/json')
+
+
+
+
+@app.route('/') 
 def index():
+#    return Response(out, mimetype='application/json')
     n = random.randint(0, 100)
     q.put(n)
     return '%s\n' % n
