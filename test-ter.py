@@ -85,6 +85,22 @@ def bruteadmin(mlink):
 
     return Response(out, mimetype='application/json')
 
+
+
+# Site bruteadmin
+@app.route('/a/sbruteadmin/<mlink>')
+def sbruteadmin(mlink):
+    #ll = mlink.split(',')
+    cmd = ["sh","sbruteadmin.sh",mlink]
+    p = subprocess.Popen(cmd, stdout = subprocess.PIPE,
+                            stderr=subprocess.PIPE,
+                            stdin=subprocess.PIPE)
+    out,err = p.communicate()
+
+    return Response(out, mimetype='application/json')
+
+
+
 @app.route('/a/host/<ip>')
 
 def host(ip):
