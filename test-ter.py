@@ -88,10 +88,10 @@ def bruteadmin(mlink):
 
 
 # Site bruteadmin
-@app.route('/a/sbruteadmin/<mlink>')
-def sbruteadmin(mlink):
+@app.route('/a/sbruteadmin/<slink>')
+def sbruteadmin(slink):
     #ll = mlink.split(',')
-    cmd = ["sh","sbruteadmin.sh",mlink]
+    cmd = ["sh","sbruteadmin.sh",slink]
     p = subprocess.Popen(cmd, stdout = subprocess.PIPE,
                             stderr=subprocess.PIPE,
                             stdin=subprocess.PIPE)
@@ -99,6 +99,19 @@ def sbruteadmin(mlink):
 
     return Response(out, mimetype='application/json')
 
+
+
+#Brute Password
+@app.route('/a/brutepass/<plink>')
+def brutepass(plink):
+    #ll = mlink.split(',')
+    cmd = ["sh","bruteadmin.sh",plink]
+    p = subprocess.Popen(cmd, stdout = subprocess.PIPE,
+                            stderr=subprocess.PIPE,
+                            stdin=subprocess.PIPE)
+    out,err = p.communicate()
+
+    return Response(out, mimetype='application/json')
 
 
 @app.route('/a/host/<ip>')
