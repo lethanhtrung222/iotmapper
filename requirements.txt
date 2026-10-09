@@ -1,4 +1,4 @@
-geopy==1.17.0
+geopy==2.5.0
 colorama==0.3.9
 shodan==1.10.4
 folium==0.6.0
